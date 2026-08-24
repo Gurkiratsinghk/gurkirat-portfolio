@@ -209,6 +209,32 @@ a {
   margin-top: 0.15rem;
 }
 
+/* Project links — a small row beneath the title, middot-separated. */
+.item__links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.1rem 0.5rem;
+  margin-top: 0.4rem;
+}
+
+.item__links a {
+  font-size: 0.7rem;
+  font-weight: 300;
+  color: var(--ink-light);
+  transition: color 0.2s;
+}
+
+.item__links a:hover {
+  color: var(--burgundy-light);
+}
+
+.item__links a + a::before {
+  content: '·';
+  margin-right: 0.5rem;
+  color: var(--rule);
+}
+
 .item__empty {
   font-family: var(--serif);
   font-style: italic;

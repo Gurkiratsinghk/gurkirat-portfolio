@@ -49,14 +49,44 @@ function ProjectsColumn({projects}: {projects: Project[]}) {
     <div>
       <div className="col__head">Projects</div>
       {projects.length === 0 && <p className="item__empty">No projects added yet.</p>}
-      {projects.map((project) => (
-        <div className="item" key={project._id}>
-          <a className="item__title" href="#portfolio">
-            {project.title} <Ext />
-          </a>
-          <div className="item__year">{project.year}</div>
-        </div>
-      ))}
+      {projects.map((project) => {
+        // The title points at the first link; a project with none is plain text.
+        const primary = project.links[0]
+
+        return (
+          <div className="item" key={project._id}>
+            {primary ? (
+              <a
+                className="item__title"
+                href={primary.url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {project.title} <Ext />
+              </a>
+            ) : (
+              <span className="item__title">{project.title}</span>
+            )}
+
+            {project.links.length > 0 && (
+              <div className="item__links">
+                {project.links.map((link) => (
+                  <a
+                    key={link.url}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+            )}
+
+            <div className="item__year">{project.year}</div>
+          </div>
+        )
+      })}
     </div>
   )
 }

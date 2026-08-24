@@ -24,7 +24,8 @@ export const NEWS_QUERY = `*[_type == "newsEntry"] | order(featured desc, publis
 // Manual ordering: lowest displayOrder sits at the top of the column. Entries
 // with no displayOrder sort to the bottom, newest year first.
 export const PROJECTS_QUERY = `*[_type == "project"] | order(coalesce(displayOrder, 999999) asc, year desc) {
-  _id, title, year, displayOrder
+  _id, title, year, displayOrder,
+  "links": coalesce(links[defined(url)]{label, url}, [])
 }`
 
 // Prefers the singleton id used by the studio's custom structure

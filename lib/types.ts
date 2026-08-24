@@ -30,11 +30,18 @@ export type NewsEntry = {
   featured?: boolean
 }
 
+export type ProjectLink = {
+  label: string
+  url: string
+}
+
 export type Project = {
   _id: string
   title: string
   year: string
   displayOrder?: number
+  /** In studio order. The first is where the project title points. */
+  links: ProjectLink[]
 }
 
 export type Resume = {
