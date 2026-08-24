@@ -21,6 +21,12 @@ export const NEWS_QUERY = `*[_type == "newsEntry"] | order(featured desc, publis
   _id, headline, publication, url, publishedAt, featured
 }`
 
+// Manual ordering: lowest displayOrder sits at the top of the column. Entries
+// with no displayOrder sort to the bottom, newest year first.
+export const PROJECTS_QUERY = `*[_type == "project"] | order(coalesce(displayOrder, 999999) asc, year desc) {
+  _id, title, year, displayOrder
+}`
+
 // Prefers the singleton id used by the studio's custom structure
 // (setup-strategy.md §1.5); falls back to the most recent resume document if
 // the studio is still on the default flat sidebar, where new documents get a

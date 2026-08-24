@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Reveal from './Reveal'
-import {CONNECT_LINKS, PROJECTS} from '@/lib/config'
-import type {BlogColumnItem, NewsEntry} from '@/lib/types'
+import {CONNECT_LINKS} from '@/lib/config'
+import type {BlogColumnItem, NewsEntry, Project} from '@/lib/types'
 
 const Ext = () => (
   <span className="ext" aria-hidden="true">
@@ -44,13 +44,13 @@ function BlogsColumn({items}: {items: BlogColumnItem[]}) {
   )
 }
 
-function ProjectsColumn() {
+function ProjectsColumn({projects}: {projects: Project[]}) {
   return (
     <div>
       <div className="col__head">Projects</div>
-      {PROJECTS.map((project) => (
-        <div className="item" key={project.title}>
-          {/* Static for now — no Sanity integration yet (handoff §4.3). */}
+      {projects.length === 0 && <p className="item__empty">No projects added yet.</p>}
+      {projects.map((project) => (
+        <div className="item" key={project._id}>
           <a className="item__title" href="#portfolio">
             {project.title} <Ext />
           </a>
@@ -109,9 +109,11 @@ function ConnectColumn() {
 
 export default function PortfolioGrid({
   blogs,
+  projects,
   news,
 }: {
   blogs: BlogColumnItem[]
+  projects: Project[]
   news: NewsEntry[]
 }) {
   return (
@@ -119,7 +121,7 @@ export default function PortfolioGrid({
       <Reveal>
         <div className="portfolio__grid">
           <BlogsColumn items={blogs} />
-          <ProjectsColumn />
+          <ProjectsColumn projects={projects} />
           <NewsColumn entries={news} />
           <ConnectColumn />
         </div>

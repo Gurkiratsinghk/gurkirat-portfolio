@@ -30,6 +30,13 @@ export type NewsEntry = {
   featured?: boolean
 }
 
+export type Project = {
+  _id: string
+  title: string
+  year: string
+  displayOrder?: number
+}
+
 export type Resume = {
   fileUrl: string
   originalFilename?: string
